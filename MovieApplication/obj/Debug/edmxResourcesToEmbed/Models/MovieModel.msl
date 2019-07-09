@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DbmovieModelStoreContainer" CdmEntityContainer="DbmovieEntities">
+    <EntitySetMapping Name="Actors">
+      <EntityTypeMapping TypeName="DbmovieModel.Actor">
+        <MappingFragment StoreEntitySet="Actor">
+          <ScalarProperty Name="ActBio" ColumnName="ActBio" />
+          <ScalarProperty Name="ActDOB" ColumnName="ActDOB" />
+          <ScalarProperty Name="ActSex" ColumnName="ActSex" />
+          <ScalarProperty Name="ActName" ColumnName="ActName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="DbmovieModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movies1">
+      <EntityTypeMapping TypeName="DbmovieModel.Movies">
+        <MappingFragment StoreEntitySet="Movies">
+          <ScalarProperty Name="Poster" ColumnName="Poster" />
+          <ScalarProperty Name="Plot" ColumnName="Plot" />
+          <ScalarProperty Name="Realease" ColumnName="Realease" />
+          <ScalarProperty Name="MovName" ColumnName="MovName" />
+          <ScalarProperty Name="MoviesId" ColumnName="MoviesId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MoviesActors">
+      <EntityTypeMapping TypeName="DbmovieModel.MoviesActor">
+        <MappingFragment StoreEntitySet="MoviesActor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CastId" ColumnName="CastId" />
+          <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

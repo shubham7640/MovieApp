@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbmovieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DbmovieEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Actors" EntityType="DbmovieModel.Actor" />
+    <EntitySet Name="Admins" EntityType="DbmovieModel.Admin" />
+    <EntitySet Name="Movies1" EntityType="DbmovieModel.Movies" />
+    <EntitySet Name="MoviesActors" EntityType="DbmovieModel.MoviesActor" />
+    <AssociationSet Name="FK__MoviesAct__CastI__49C3F6B7" Association="DbmovieModel.FK__MoviesAct__CastI__49C3F6B7">
+      <End Role="Actor" EntitySet="Actors" />
+      <End Role="MoviesActor" EntitySet="MoviesActors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MoviesAct__Movie__4AB81AF0" Association="DbmovieModel.FK__MoviesAct__Movie__4AB81AF0">
+      <End Role="Movy" EntitySet="Movies1" />
+      <End Role="MoviesActor" EntitySet="MoviesActors" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Actor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ActName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ActSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ActDOB" Type="DateTime" Precision="0" />
+    <Property Name="ActBio" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MoviesActors" Relationship="DbmovieModel.FK__MoviesAct__CastI__49C3F6B7" FromRole="Actor" ToRole="MoviesActor" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Movies">
+    <Key>
+      <PropertyRef Name="MoviesId" />
+    </Key>
+    <Property Name="MoviesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MovName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Realease" Type="DateTime" Precision="0" />
+    <Property Name="Plot" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Poster" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MoviesActors" Relationship="DbmovieModel.FK__MoviesAct__Movie__4AB81AF0" FromRole="Movy" ToRole="MoviesActor" />
+  </EntityType>
+  <EntityType Name="MoviesActor">
+    <Key>
+      <PropertyRef Name="MovieId" />
+      <PropertyRef Name="CastId" />
+    </Key>
+    <Property Name="MovieId" Type="Int32" Nullable="false" />
+    <Property Name="CastId" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Actor" Relationship="DbmovieModel.FK__MoviesAct__CastI__49C3F6B7" FromRole="MoviesActor" ToRole="Actor" />
+    <NavigationProperty Name="Movy" Relationship="DbmovieModel.FK__MoviesAct__Movie__4AB81AF0" FromRole="MoviesActor" ToRole="Movy" />
+  </EntityType>
+  <Association Name="FK__MoviesAct__CastI__49C3F6B7">
+    <End Type="DbmovieModel.Actor" Role="Actor" Multiplicity="1" />
+    <End Type="DbmovieModel.MoviesActor" Role="MoviesActor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MoviesActor">
+        <PropertyRef Name="CastId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MoviesAct__Movie__4AB81AF0">
+    <End Type="DbmovieModel.Movies" Role="Movy" Multiplicity="1" />
+    <End Type="DbmovieModel.MoviesActor" Role="MoviesActor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movy">
+        <PropertyRef Name="MoviesId" />
+      </Principal>
+      <Dependent Role="MoviesActor">
+        <PropertyRef Name="MovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

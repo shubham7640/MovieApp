@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbmovieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Actor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ActSex" Type="nvarchar" MaxLength="10" />
+    <Property Name="ActDOB" Type="date" />
+    <Property Name="ActBio" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movies">
+    <Key>
+      <PropertyRef Name="MoviesId" />
+    </Key>
+    <Property Name="MoviesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MovName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Realease" Type="date" />
+    <Property Name="Plot" Type="nvarchar" MaxLength="500" />
+    <Property Name="Poster" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="MoviesActor">
+    <Key>
+      <PropertyRef Name="MovieId" />
+      <PropertyRef Name="CastId" />
+    </Key>
+    <Property Name="MovieId" Type="int" Nullable="false" />
+    <Property Name="CastId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__MoviesAct__CastI__02FC7413">
+    <End Role="Actor" Type="Self.Actor" Multiplicity="1" />
+    <End Role="MoviesActor" Type="Self.MoviesActor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MoviesActor">
+        <PropertyRef Name="CastId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MoviesAct__Movie__03F0984C">
+    <End Role="Movies" Type="Self.Movies" Multiplicity="1" />
+    <End Role="MoviesActor" Type="Self.MoviesActor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies">
+        <PropertyRef Name="MoviesId" />
+      </Principal>
+      <Dependent Role="MoviesActor">
+        <PropertyRef Name="MovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DbmovieModelStoreContainer">
+    <EntitySet Name="Actor" EntityType="Self.Actor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movies" EntityType="Self.Movies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MoviesActor" EntityType="Self.MoviesActor" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__MoviesAct__CastI__02FC7413" Association="Self.FK__MoviesAct__CastI__02FC7413">
+      <End Role="Actor" EntitySet="Actor" />
+      <End Role="MoviesActor" EntitySet="MoviesActor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MoviesAct__Movie__03F0984C" Association="Self.FK__MoviesAct__Movie__03F0984C">
+      <End Role="Movies" EntitySet="Movies" />
+      <End Role="MoviesActor" EntitySet="MoviesActor" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
