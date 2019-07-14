@@ -90,9 +90,9 @@ namespace MovieApplication.Controllers
         }
         public ActionResult ListMovie(int? page)
         {
-            int pagesize = 9, pageindex = 1;
-            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
-            //  var list = db.Movies1.Join(db.Actors,a=>a.MoviesId=) .OrderByDescending(x=>x.MoviesId).Select(x=>new { });
+            //int pagesize = 9, pageindex = 1;
+            //pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
+            ////  var list = db.Movies1.Join(db.Actors,a=>a.MoviesId=) .OrderByDescending(x=>x.MoviesId).Select(x=>new { });
             //ShowData sd = new ShowData();
             var list = (from mv in db.Movies1
                        join ac in db.MoviesActors
@@ -209,74 +209,19 @@ namespace MovieApplication.Controllers
                 return RedirectToAction("login");
             }
             var mov = db.Movies1.Find(id);
+
             return View(mov);
-        }   //public ActionResult Edit(int? id)
-            //{
-            //    if (Session["AdminId"] == null)
-            //    {
-            //        return RedirectToAction("login");
-            //    }
-            //    //var mov = db.Movies1.Find(id);
-            //    //return View(mov);
-            //    var movieViewModel = new MoviesViewModel
-            //    {
-            //        Movies = db.Movies1.Include(i => i.ActId).First(i => i.MovId == id)
-            //    };
-
-            //    if (movieViewModel.Movies == null)
-            //        return HttpNotFound();
-            //    var allActorsList = db.Actors.ToList();
-
-            //    movieViewModel.AllActors = allActorsList.Select(o => new SelectListItem
-            //    {
-            //        Text = o.ActName,
-            //        Value = o.Id.ToString()
-            //    });
-
-            //    //ViewBag.MovId = new SelectList(db.Movies1, "MovId", "FullName", movieViewModel.Movies.MovId);
-            //    return View(movieViewModel);
-            //}
-            ////[HttpPost]
-            //[ValidateAntiForgeryToken]//[Bind(Include = "Title,Id,EmployerID,SelectedJobTags")]
-            //public ActionResult Edit(MoviesViewModel movieView)
-            //{
-
-            //    if (movieView == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-
-
-            //    if (ModelState.IsValid)
-            //    {
-            //        var jobToUpdate = db.Movies1
-            //            .Include(i => i.JobTags).First(i => i. == movieView.Movies.MovId);
-
-            //        if (TryUpdateModel(jobToUpdate, "JobPost", new string[] { "Title", "EmployerID" }))
-            //        {
-            //            var newJobTags = db.Actors.Where(
-            //                m => movieView.SelectedActors.Contains(m.ActId)).ToList();
-            //            var updatedJobTags = new HashSet<int>(jobpostView.SelectedJobTags);
-            //            foreach (JobTag jobTag in _db.JobTags)
-            //            {
-            //                if (!updatedJobTags.Contains(jobTag.Id))
-            //                {
-            //                    jobToUpdate.JobTags.Remove(jobTag);
-            //                }
-            //                else
-            //                {
-            //                    jobToUpdate.JobTags.Add((jobTag));
-            //                }
-            //            }
-
-            //            _db.Entry(jobToUpdate).State = System.Data.Entity.EntityState.Modified;
-            //            _db.SaveChanges();
-            //        }
-
-            //        return RedirectToAction("Index");
-            //    }
-            //    ViewBag.EmployerID = new SelectList(_db.Employers, "Id", "FullName", jobpostView.JobPost.EmployerID);
-            //    return View(jobpostView);
-            //}
-            public ActionResult Delete()
+        }
+        public ActionResult EditActor(int? id)
+        {
+            if (Session["AdminId"] == null)
+            {
+                return RedirectToAction("login");
+            }
+            var mov = db.Movies1.Find(id);
+            return View(mov);
+        }
+        public ActionResult Delete()
         {
             if (Session["AdminId"] == null)
             {

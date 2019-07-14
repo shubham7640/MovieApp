@@ -243,8 +243,9 @@
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\ListMovie.cshtml" />
     <Content Include="Views\Admin\AddActor.cshtml" />
-    <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\AddButtonActor.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\EditActor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\upload\" />
